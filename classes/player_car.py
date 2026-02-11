@@ -27,13 +27,13 @@ class PlayerCar(ICollidable, IUpdatable, IDrawable):
             self.x = PlayerCar.LEFT_LIMIT 
         self.rect.centerx = self.x
 
-    def move_left(self):
+    def move_right(self):
         """
         Метод руху вправо
         """
         self.x += self.speed
-        if self.x > PlayerCar.LEFT_LIMIT:
-            self.x = PlayerCar.LEFT_LIMIT 
+        if self.x > PlayerCar.RIGHT_LIMIT:
+            self.x = PlayerCar.RIGHT_LIMIT 
         self.rect.centerx = self.x
 
     def update(self):
