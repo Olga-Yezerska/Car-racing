@@ -36,3 +36,21 @@ class PlayerCar(ICollidable, IUpdatable, IDrawable):
             self.x = PlayerCar.LEFT_LIMIT 
         self.rect.centerx = self.x
 
+    def update(self):
+        """
+        Метод оновлення стану машини кожного кадру
+        """
+        self.rect.centerx = self.x   
+        self.rect.centery = self.y
+
+    def draw(self, screen: pygame.Surface):
+        """
+        Метод малювання машини на екрані 
+        """
+        screen.blit(self.image, self.rect)
+
+    def get_rect(self) -> pygame.Rect:
+        """
+        Повертає актуальний прямокутник для перевірки колізій
+        """
+        return self.rect
