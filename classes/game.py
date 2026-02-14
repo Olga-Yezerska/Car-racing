@@ -24,4 +24,60 @@ class Game:
         self.running = True
         self.paused = False
     
+    def run(self):
+        while self.running:
+
+            events = pygame.event.get()
+            input_data = self.input_handler.handle_input(events)
+
+            # вихід
+            if input_data.get("quit"):
+                return "menu"
+
+            # пауза
+            if input_data.get("pause_toggle"):
+                return "pause"
+
+            self.update()
+            self.render()
+            self.clock.tick(60)
+
+        return "menu"
+
     
+    def handle_input(self):
+        """
+        Викликає InputHandler для обробки клавіш.
+        Обробляє паузу та вихід з гри.
+        """
+        events = pygame.event.get()
+        input_data = self.input_handler.handle_input(events)
+
+        # Вихід із гри
+        if input_data.get('quit'):
+            self.running = False
+
+        # Пауза
+        if input_data.get('pause_toggle'):
+            self.paused = not self.paused
+
+    def update(self):
+        # Оновлюємо гравця та дорогу
+        self.player.update()
+        self.road.update()
+        #self.obstacle_manager.update()
+        #self.check_collisions()
+
+    def render(self):
+        # Малюємо дорогу та гравця
+        self.road.draw(self.screen)
+        self.player.draw(self.screen)
+
+        #for obstacle in self.obstacle_manager.obstacles:
+        #    obstacle.draw(self.screen)
+
+        pygame.display.flip()
+
+    def check_collisions(self):
+        # Тимчасово ігноруємо
+        pass
