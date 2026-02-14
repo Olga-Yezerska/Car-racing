@@ -86,4 +86,65 @@ class Menu(IDrawable):
                 return "resume"
 
         return None
+    def draw_pause_menu(self):
+    # Напівпрозорий фон
+        overlay = pygame.Surface((800, 600))
+        overlay.set_alpha(180)
+        overlay.fill((0, 0, 0))
+        self.screen.blit(overlay, (0, 0))
+
+        # Текст PAUSE
+        pause_text = self.font_big.render("PAUSE", True, (255, 255, 255))
+        self.screen.blit(pause_text, (310, 180))
+
+        # Кнопка Продовжити
+        pygame.draw.rect(self.screen, (50, 150, 50), self.resume_button)
+        resume_text = self.font_small.render("Продовжити", True, (255, 255, 255))
+        self.screen.blit(resume_text, (330, 270))
+
+        # Кнопка Вийти
+        pygame.draw.rect(self.screen, (150, 50, 50), self.menu_button)
+        menu_text = self.font_small.render("Вийти", True, (255, 255, 255))
+        self.screen.blit(menu_text, (360, 340))
+  
+    def draw(self):
     
+        self.screen.fill((20, 20, 20))
+
+        if self.mode == "main":
+            self.draw_text("1 - Play", 200)
+            self.draw_text("2 - Settings", 250)
+
+        elif self.mode == "settings":
+            self.draw_text(f"Car: {self.settings.available_cars[self.settings.car_index]}", 200)
+            self.draw_text(f"Road: {self.settings.available_roads[self.settings.road_index]}", 240)
+            self.draw_text(f"Music: {self.settings.music_library[self.settings.music_index]}", 280)
+            self.draw_text(f"Volume: {round(self.settings.sound_volume,1)}", 320)
+            self.draw_text("ESC - Back", 380)
+
+        elif self.mode == "pause":
+            self.draw_pause_overlay()
+
+        pygame.display.flip()
+
+    def draw_text(self, text, y):
+        surface = self.font.render(text, True, (255, 255, 255))
+        self.screen.blit(surface, (100, y))
+
+    def draw_pause_overlay(self):
+        overlay = pygame.Surface((800, 600))
+        overlay.set_alpha(180)
+        overlay.fill((0, 0, 0))
+        self.screen.blit(overlay, (0, 0))
+
+        pause_text = self.font_big.render("PAUSE", True, (255, 255, 255))
+        self.screen.blit(pause_text, (310, 180))
+
+        pygame.draw.rect(self.screen, (50, 150, 50), self.resume_button)
+        resume_text = self.font_small.render("Продовжити", True, (255, 255, 255))
+        self.screen.blit(resume_text, (330, 270))
+
+        pygame.draw.rect(self.screen, (150, 50, 50), self.menu_button)
+        menu_text = self.font_small.render("Вийти", True, (255, 255, 255))
+        self.screen.blit(menu_text, (360, 340))
+
