@@ -34,5 +34,19 @@ while running:
         result = game.run()
         state = result
     
+    elif state == "pause":
+        menu = Menu(screen, settings)
+        menu.mode = "pause"
+        result = menu.run(input_handler)
 
+        if result == "resume":
+            state = "game"
+
+        elif result == "menu":
+            state = "menu"
+
+        elif result == "quit":
+            running = False
+    
 pygame.quit()
+ 
