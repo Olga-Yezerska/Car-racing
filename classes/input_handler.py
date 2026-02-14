@@ -3,7 +3,7 @@ class InputHandler:
     """
     Клас для обробки введень користувача
     """
-    def init(self, player=None, game=None):
+    def __init__(self, player=None, game=None):
         """
         Конструктор класу
         """
