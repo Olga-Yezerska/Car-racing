@@ -1,9 +1,8 @@
 import pygame
 from classes.input_handler import InputHandler
 from classes.menu import Menu
-# Заглушки для перешкод і колізій
-# from classes.obstacle_manager import ObstacleManager
-# from classes.collision_system import CollisionSystem
+from classes.obstacle_manager import ObstacleManager
+from classes.collision_system import CollisionSystem
 
 class Game:
     def __init__(self, screen, settings):
@@ -16,8 +15,8 @@ class Game:
 
         self.settings.apply_music()
 
-        #self.obstacle_manager = ObstacleManager()
-        #self.collision_system = CollisionSystem()
+        self.obstacle_manager = ObstacleManager(self.road.scroll_speed)
+        self.collision_system = CollisionSystem(self.player, self.obstacle_manager)
         # InputHandler тепер управляє гравцем
         self.input_handler = InputHandler(player=self.player, game=self)
 
@@ -65,19 +64,19 @@ class Game:
         # Оновлюємо гравця та дорогу
         self.player.update()
         self.road.update()
-        #self.obstacle_manager.update()
-        #self.check_collisions()
+        self.obstacle_manager.update()
+        self.check_collisions()
 
     def render(self):
         # Малюємо дорогу та гравця
         self.road.draw(self.screen)
         self.player.draw(self.screen)
 
-        #for obstacle in self.obstacle_manager.obstacles:
-        #    obstacle.draw(self.screen)
+        for obstacle in self.obstacle_manager.obstacles:
+            obstacle.draw(self.screen)
 
         pygame.display.flip()
 
     def check_collisions(self):
-        # Тимчасово ігноруємо
-        pass
+        if self.collision_system.check_collisions():
+            self.running = False
