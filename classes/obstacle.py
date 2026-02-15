@@ -3,6 +3,14 @@ from classes.interfaces import ICollidable, IUpdatable, IDrawable
 
 class Obstacle(ICollidable, IUpdatable, IDrawable):
     def __init__(self, x: int, obstacle_type: str = "normal", y: int = -50, speed: int = 6):
+        """
+        Initializes an obstacle object.
+        
+        :param x: Initial horizontal position.
+        :param obstacle_type: Type of obstacle
+        :param y: Initial vertical position (starts above the screen).
+        :param speed: Speed at which the obstacle moves down the screen.
+        """
         self.x = x
         self.y = y
         self.speed = speed
@@ -26,11 +34,24 @@ class Obstacle(ICollidable, IUpdatable, IDrawable):
         self.rect = self.image.get_rect(center=(self.x, self.y))
 
     def update(self) -> None:
+        """
+        Updates the obstacle's position by moving it down.
+        """
         self.y += self.speed
         self.rect.centery = self.y
 
     def draw(self, screen: pygame.Surface) -> None:
+        """
+        Draws the obstacle on the screen.
+        
+        :param screen: The Pygame surface to draw on.
+        """
         screen.blit(self.image, self.rect)
 
     def get_rect(self) -> pygame.Rect:
+        """
+        Returns the rectangle for collision detection.
+        
+        :return: The obstacle's Rect.
+        """
         return self.rect
