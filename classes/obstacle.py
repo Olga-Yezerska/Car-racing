@@ -2,12 +2,27 @@ import pygame
 from classes.interfaces import ICollidable, IUpdatable, IDrawable
 
 class Obstacle(ICollidable, IUpdatable, IDrawable):
-    def __init__(self, x: int, y: int = -50, speed: int = 6):
+    def __init__(self, x: int, obstacle_type: str = "normal", y: int = -50, speed: int = 6):
         self.x = x
         self.y = y
         self.speed = speed
-        original = pygame.image.load("obstacle.png").convert_alpha()
-        self.image = pygame.transform.scale(original, (60, 100))
+        self.obstacle_type = obstacle_type
+        
+        if obstacle_type == "small":
+            size = (50, 80)
+            img_path = "obstacle.png"   # заглушки для різних типів
+        elif obstacle_type == "large":
+            size = (90, 140)
+            img_path = "obstacle.png"
+        elif obstacle_type == "truck":
+            size = (80, 160)
+            img_path = "obstacle.png"
+        else:  # normal / default
+            size = (65, 105)
+            img_path = "obstacle.png"
+        
+        original = pygame.image.load(img_path).convert_alpha()
+        self.image = pygame.transform.scale(original, size)
         self.rect = self.image.get_rect(center=(self.x, self.y))
 
     def update(self) -> None:

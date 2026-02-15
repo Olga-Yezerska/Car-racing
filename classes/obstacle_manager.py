@@ -9,11 +9,22 @@ class ObstacleManager:
         self.obstacles = []
 
     def update(self) -> None:
-        # Randomly generate a new obstacle with a small probability per frame
-        if random.random() < 0.02:  # Adjust probability for desired spawn rate
-            x = random.randint(PlayerCar.LEFT_LIMIT, PlayerCar.RIGHT_LIMIT)
-            new_obstacle = Obstacle(x, y=-50, speed=self.scroll_speed)
-            self.obstacles.append(new_obstacle)
+        if random.random() < 0.025:
+            x = random.randint(PlayerCar.LEFT_LIMIT + 30, PlayerCar.RIGHT_LIMIT - 30)
+            
+            # різні ймовірності для різних типів
+            r = random.random()
+            if r < 0.15:
+                obs_type = "small"
+            elif r < 0.25:
+                obs_type = "large"
+            elif r < 0.30:
+                obs_type = "truck"
+            else:
+                obs_type = "normal"
+                
+            obs = Obstacle(x, obstacle_type=obs_type, speed=self.scroll_speed)
+            self.obstacles.append(obs)
 
         # Update existing obstacles and remove those off-screen
         for obs in self.obstacles[:]:
