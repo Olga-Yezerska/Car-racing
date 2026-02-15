@@ -6,7 +6,8 @@ class Obstacle(ICollidable, IUpdatable, IDrawable):
         self.x = x
         self.y = y
         self.speed = speed
-        self.image = pygame.image.load("obstacle.png").convert_alpha()
+        original = pygame.image.load("obstacle.png").convert_alpha()
+        self.image = pygame.transform.scale(original, (60, 100))
         self.rect = self.image.get_rect(center=(self.x, self.y))
 
     def update(self) -> None:
