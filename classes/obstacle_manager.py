@@ -5,10 +5,10 @@ from classes.player_car import PlayerCar
 class ObstacleManager:
     def __init__(self, scroll_speed: int, screen_height: int = 600):
         """
-        Initializes the obstacle manager.
+        Ініціалізує менеджер перешкод.
         
-        :param scroll_speed: The speed at which the road scrolls (used for obstacle movement).
-        :param screen_height: The height of the game screen (default 600).
+        :param scroll_speed: Швидкість прокрутки дороги (використовується для переміщення перешкод).
+        :param screen_height: Висота ігрового екрану (за замовчуванням 600).
         """
         self.scroll_speed = scroll_speed
         self.screen_height = screen_height
@@ -16,7 +16,7 @@ class ObstacleManager:
 
     def update(self) -> None:
         """
-        Updates all obstacles, generates new ones randomly, and removes off-screen ones.
+        Оновлює всі перешкоди, випадково генерує нові та видаляє ті, що знаходяться поза екраном.
         """
         if random.random() < 0.025:
             x = random.randint(PlayerCar.LEFT_LIMIT + 30, PlayerCar.RIGHT_LIMIT - 30)
@@ -35,7 +35,7 @@ class ObstacleManager:
             obs = Obstacle(x, obstacle_type=obs_type, speed=self.scroll_speed)
             self.obstacles.append(obs)
 
-        # Update existing obstacles and remove those off-screen
+        # Оновити існуючі перешкоди та видалити ті, що знаходяться поза екраном
         for obs in self.obstacles[:]:
             obs.update()
             if obs.y > self.screen_height + 50:

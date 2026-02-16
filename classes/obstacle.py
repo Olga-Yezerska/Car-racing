@@ -4,12 +4,13 @@ from classes.interfaces import ICollidable, IUpdatable, IDrawable
 class Obstacle(ICollidable, IUpdatable, IDrawable):
     def __init__(self, x: int, obstacle_type: str = "normal", y: int = -50, speed: int = 6):
         """
-        Initializes an obstacle object.
-        
-        :param x: Initial horizontal position.
-        :param obstacle_type: Type of obstacle
-        :param y: Initial vertical position (starts above the screen).
-        :param speed: Speed at which the obstacle moves down the screen.
+        Ініціалізує об'єкт перешкоди.
+
+        :param x: Початкове горизонтальне положення.
+        :param x: Початкове горизонтальне положення.
+        :param obstacle_type: Тип перешкоди.
+        :param y: Початкове вертикальне положення (починається над екраном).
+        :param speed: Швидкість, з якою перешкода рухається вниз по екрану.
         """
         self.x = x
         self.y = y
