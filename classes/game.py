@@ -3,6 +3,9 @@ from classes.input_handler import InputHandler
 from classes.menu import Menu
 from classes.obstacle_manager import ObstacleManager
 from classes.collision_system import CollisionSystem
+from classes.score import Score
+from classes.score_manager import ScoreManager
+from classes.score_display import ScoreDisplay
 
 class Game:
     def __init__(self, screen, settings):
@@ -11,7 +14,7 @@ class Game:
         self.settings = settings
 
         self.player = self.settings.create_car()
-        self.road = self.settings.create_road()
+        self.road = self.settings.create_road()  
 
         self.settings.apply_music()
 
@@ -19,6 +22,13 @@ class Game:
         self.collision_system = CollisionSystem(self.player, self.obstacle_manager)
         # InputHandler тепер управляє гравцем
         self.input_handler = InputHandler(player=self.player, game=self)
+
+        #додавання балів
+        self.score = Score()
+        self.score_manager = ScoreManager(self.score)
+        self.score_display = ScoreDisplay(self.score_manager)
+
+        self.road.on_cycle_complete = self.score_manager.cycle_complete
 
         self.running = True
         self.paused = False
@@ -66,6 +76,7 @@ class Game:
         self.road.update()
         self.obstacle_manager.update()
         self.check_collisions()
+        self.score_manager.update()
 
     def render(self):
         # Малюємо дорогу та гравця
@@ -74,6 +85,8 @@ class Game:
 
         for obstacle in self.obstacle_manager.obstacles:
             obstacle.draw(self.screen)
+
+        self.score_display.draw(self.screen) #відображення балів
 
         pygame.display.flip()
 
