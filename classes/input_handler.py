@@ -25,24 +25,21 @@ class InputHandler:
         for event in events:
             if event.type == pygame.QUIT:
                 result["quit"] = True
+
             if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_1:
-                    result["select_1"] = True
-                if event.key == pygame.K_2:
-                    result["select_2"] = True
+                if event.key == pygame.K_RETURN:
+                    result["enter"] = True
                 if event.key == pygame.K_ESCAPE:
                     result["escape"] = True
-                if event.key == pygame.K_RIGHT:
-                    result["right"] = True
-                if event.key == pygame.K_LEFT:
-                    result["left"] = True
                 if event.key == pygame.K_UP:
                     result["up"] = True
                 if event.key == pygame.K_DOWN:
                     result["down"] = True
-                if event.key == pygame.K_m:
-                    result["music"] = True
-                if event.key == pygame.K_SPACE or event.key == pygame.K_p:
+                if event.key == pygame.K_LEFT:
+                    result["left"] = True
+                if event.key == pygame.K_RIGHT:
+                    result["right"] = True
+                if event.key == pygame.K_p:
                     result["pause_toggle"] = True
 
         keys = pygame.key.get_pressed()
