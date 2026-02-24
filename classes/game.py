@@ -1,6 +1,5 @@
 import pygame
 from classes.input_handler import InputHandler
-from classes.menu import Menu
 from classes.obstacle_manager import ObstacleManager
 from classes.collision_system import CollisionSystem
 from classes.score import Score
@@ -15,81 +14,46 @@ class Game:
 
         self.player = self.settings.create_car()
         self.road = self.settings.create_road()  
-
-        self.settings.apply_music()
-
         self.obstacle_manager = ObstacleManager(self.road.scroll_speed)
         self.collision_system = CollisionSystem(self.player, self.obstacle_manager)
-        # InputHandler тепер управляє гравцем
-        self.input_handler = InputHandler(player=self.player, game=self)
-
-        #додавання балів
+        # Бали
         self.score = Score()
         self.score_manager = ScoreManager(self.score)
         self.score_display = ScoreDisplay(self.score_manager)
-
         self.road.on_cycle_complete = self.score_manager.cycle_complete
 
         self.running = True
-        self.paused = False
-    
-    def run(self):
-        while self.running:
+        self.game_over = False
 
-            events = pygame.event.get()
-            input_data = self.input_handler.handle_input(events)
-
-            # вихід
-            if input_data.get("quit"):
-                return "menu"
-
-            # пауза
-            if input_data.get("pause_toggle"):
-                return "pause"
-
-            self.update()
-            self.render()
-            self.clock.tick(60)
-
-        return "menu"
-
-    
-    def handle_input(self):
-        """
-        Викликає InputHandler для обробки клавіш.
-        Обробляє паузу та вихід з гри.
-        """
-        events = pygame.event.get()
-        input_data = self.input_handler.handle_input(events)
-
-        # Вихід із гри
-        if input_data.get('quit'):
-            self.running = False
+    def run_frame(self, input_data):
+        # Вихід
+        if input_data.get("quit"):
+            return "menu"
 
         # Пауза
-        if input_data.get('pause_toggle'):
-            self.paused = not self.paused
+        if input_data.get("pause_toggle"):
+            return "pause"
 
-    def update(self):
-        # Оновлюємо гравця та дорогу
-        self.player.update()
+        # Оновлення
+        self.player.update() 
         self.road.update()
         self.obstacle_manager.update()
-        self.check_collisions()
         self.score_manager.update()
 
-    def render(self):
-        # Малюємо дорогу та гравця
+        if self.collision_system.check_collisions():
+            self.game_over = True
+            return "game_over"
+
+        # Малювання кадру гри
+        self.draw_only() 
+
+        self.clock.tick(60)
+        return None
+
+    def draw_only(self):
+        """Метод для малювання кадру гри без оновлення логіки"""
         self.road.draw(self.screen)
         self.player.draw(self.screen)
-
-        for obstacle in self.obstacle_manager.obstacles:
-            obstacle.draw(self.screen)
-
-        self.score_display.draw(self.screen) #відображення балів
-
-        pygame.display.flip()
-
-    def check_collisions(self):
-        if self.collision_system.check_collisions():
-            self.running = False
+        for obs in self.obstacle_manager.obstacles:
+            obs.draw(self.screen)
+        self.score_display.draw(self.screen)
