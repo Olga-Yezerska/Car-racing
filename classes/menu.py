@@ -15,6 +15,26 @@ class Menu(IDrawable):
         self.resume_button = pygame.Rect(300, 260, 200, 50)
         self.menu_button = pygame.Rect(300, 330, 200, 50)
 
+        # ── Прев’ю машини в налаштуваннях ───────────────
+        self.car_preview_pos = (480, 220)           # де малювати машину
+        self.car_preview_size = (180, 360)          # розмір прев’ю 
+        self.car_images = {}                        # кеш зображень
+
+        # завантажуємо всі машини один раз
+        self._preload_car_images()
+
+    def _preload_car_images(self):
+        for name, path in self.settings.available_cars:     # розпаковуємо кортеж
+            try:
+                img = pygame.image.load(path).convert_alpha()
+                scaled = pygame.transform.scale(img, self.car_preview_size)
+                self.car_images[path] = scaled   # ключем залишаємо шлях
+            except Exception as e:
+                print(f"Не вдалося завантажити {path}: {e}")
+                surf = pygame.Surface(self.car_preview_size)
+                surf.fill((60, 60, 80))
+                self.car_images[path] = surf
+
 
     def run(self, input_handler):
         while True:
@@ -116,8 +136,13 @@ class Menu(IDrawable):
             self.draw_text("2 - Settings", 250)
 
         elif self.mode == "settings":
-            self.draw_text(f"Car: {self.settings.available_cars[self.settings.car_index]}", 200)
-            self.draw_text(f"Road: {self.settings.available_roads[self.settings.road_index]}", 240)
+            car_name = self.settings.available_cars[self.settings.car_index][0]   
+            self.draw_text(f"Car: {car_name}", 200)
+            car_path = self.settings.available_cars[self.settings.car_index][1]   
+            if car_path in self.car_images:
+                self.screen.blit(self.car_images[car_path], self.car_preview_pos)
+                
+            self.draw_text(f"Road: {self.settings.available_roads[self.settings.road_index][0]}", 240)
             self.draw_text(f"Music: {self.settings.music_library[self.settings.music_index]}", 280)
             self.draw_text(f"Volume: {round(self.settings.sound_volume,1)}", 320)
             self.draw_text("ESC - Back", 380)

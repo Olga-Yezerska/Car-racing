@@ -1,10 +1,27 @@
 import pygame
-
 class GameSettings:
     def __init__(self):
         # --- Скіни ---
-        self.available_cars = ["car_red.png", "car_blue.png"]
-        self.available_roads = ["road_1.png", "road_2.png"]
+        self.available_cars = [
+            ("Alpine",      "assets/Car/alpine.png"),
+            ("Aston Martin","assets/Car/aston.png"),
+            ("Audi",        "assets/Car/audi.png"),
+            ("Ferrari",     "assets/Car/ferrari.png"),
+            ("Haas",        "assets/Car/haas.png"),
+            ("McLaren",     "assets/Car/mclaren.png"),
+            ("Mercedes",    "assets/Car/mercedes.png"),
+            ("Red Bull",    "assets/Car/red_bull.png"),
+            ("VCARB",       "assets/Car/vcarb.png"),
+            ("Williams",    "assets/Car/williams.png"),
+        ]
+
+        self.available_roads = [
+            ("Monaco",     "assets/Road/monaco_track.jpg"),
+            ("Baku",       "assets/Road/baku_track.png"),
+            ("Singapore",  "assets/Road/singapore_track.jpg"),
+            ("Spa",        "assets/Road/spa_track.png"),
+            ("Las Vegas",  "assets/Road/vegas_track.jpg"),
+        ]
 
         self.car_index = 0
         self.road_index = 0
@@ -17,11 +34,14 @@ class GameSettings:
     # -------- Factory methods --------
     def create_car(self):
         from classes.player_car import PlayerCar
-        return PlayerCar(self.available_cars[self.car_index])
+        car_path = self.available_cars[self.car_index][1]
+        return PlayerCar(car_path)
+    
 
     def create_road(self):
         from classes.road import Road
-        return Road(self.available_roads[self.road_index])
+        road_path = self.available_roads[self.road_index][1]    # [1] — це шлях
+        return Road(road_path)
      
     # -------- Music --------
     def apply_music(self):
