@@ -36,6 +36,7 @@ while running:
         if result == "start":
             game = Game(screen, settings)
             input_handler.player = game.player
+            settings.play_random_music()
 
             state = "game"
 

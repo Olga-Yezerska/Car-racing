@@ -1,4 +1,7 @@
 import pygame
+import os
+import random
+
 class GameSettings:
     def __init__(self):
         # --- Скіни ---
@@ -26,10 +29,21 @@ class GameSettings:
         self.car_index = 0
         self.road_index = 0
 
-        # --- Музика ---
-        self.music_library = ["song1.mp3", "song2.mp3"]
+           # --- Музика ---
+        self.music_folder = "assets/Music"
+        self.music_library = self.load_music()
         self.music_index = 0
         self.sound_volume = 0.5
+        self.music_was_selected = False
+
+
+    # -------- Load music from folder --------
+    def load_music(self):
+        return [
+            os.path.join(self.music_folder, file)
+            for file in os.listdir(self.music_folder)
+            if file.endswith(".mp3")
+        ]
 
     # -------- Factory methods --------
     def create_car(self):
@@ -57,5 +71,11 @@ class GameSettings:
             "music": self.music_library[self.music_index],
             "volume": self.sound_volume
         }
-    
-    
+    def get_music_name(self):
+        filename = self.music_library[self.music_index]
+        return os.path.splitext(os.path.basename(filename))[0]
+    def play_random_music(self):
+        if not self.music_was_selected:
+            self.music_index = random.randint(0, len(self.music_library) - 1)
+        self.apply_music()
+
