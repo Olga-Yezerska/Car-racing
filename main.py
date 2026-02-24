@@ -50,11 +50,14 @@ while running:
         if result == "pause":
             menu.mode = "pause"
             menu.selected_index = 0
+            input_handler.player = None
             state = "pause"
+
 
         elif result == "game_over":
             menu.mode = "game_over"
             menu.selected_index = 0
+            input_handler.player = None
             state = "game_over"
 
     # ---------------- PAUSE ----------------
@@ -64,6 +67,7 @@ while running:
         menu.draw()
 
         if result == "resume":
+            input_handler.player = game.player
             state = "game"
 
         elif result == "menu":
@@ -83,6 +87,7 @@ while running:
             input_handler.player = game.player
             pygame.mixer.music.stop()
             settings.apply_music()
+            input_handler.player = None
             state = "game"
 
         elif result == "menu":
