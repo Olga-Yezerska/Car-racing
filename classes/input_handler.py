@@ -1,4 +1,5 @@
 import pygame
+
 class InputHandler:
     """
     Клас для обробки введень користувача
@@ -20,33 +21,42 @@ class InputHandler:
         :return: словник з діями на виконання
         :rtype: dict
         """
-        result = {}
-        
+        result = {
+            "quit": False,
+            "enter": False,
+            "escape": False,
+            "up": False,
+            "down": False,
+            "left": False,
+            "right": False,
+            "pause_toggle": False
+        }
+
+        # Обробка подій KEYDOWN та QUIT
         for event in events:
             if event.type == pygame.QUIT:
                 result["quit"] = True
-
-            if event.type == pygame.KEYDOWN:
+            elif event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_RETURN:
                     result["enter"] = True
-                if event.key == pygame.K_ESCAPE:
+                elif event.key == pygame.K_ESCAPE:
                     result["escape"] = True
-                if event.key == pygame.K_UP:
+                elif event.key == pygame.K_UP:
                     result["up"] = True
-                if event.key == pygame.K_DOWN:
+                elif event.key == pygame.K_DOWN:
                     result["down"] = True
-                if event.key == pygame.K_LEFT:
+                elif event.key == pygame.K_LEFT:
                     result["left"] = True
-                if event.key == pygame.K_RIGHT:
+                elif event.key == pygame.K_RIGHT:
                     result["right"] = True
-                if event.key == pygame.K_p:
+                elif event.key == pygame.K_p:
                     result["pause_toggle"] = True
 
-        keys = pygame.key.get_pressed()
         if self.player:
+            keys = pygame.key.get_pressed()
             if keys[pygame.K_a] or keys[pygame.K_LEFT]:
                 self.player.move_left()
-
             if keys[pygame.K_d] or keys[pygame.K_RIGHT]:
                 self.player.move_right()
+
         return result
