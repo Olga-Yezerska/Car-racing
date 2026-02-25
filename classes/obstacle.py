@@ -17,18 +17,21 @@ class Obstacle(ICollidable, IUpdatable, IDrawable):
         self.speed = speed
         self.obstacle_type = obstacle_type
         
-        if obstacle_type == "small":
-            size = (50, 80)
-            img_path = "obstacle.png"   # заглушки для різних типів
-        elif obstacle_type == "large":
-            size = (90, 140)
-            img_path = "obstacle.png"
-        elif obstacle_type == "truck":
-            size = (80, 160)
-            img_path = "obstacle.png"
-        else:  # normal / default
-            size = (65, 105)
-            img_path = "obstacle.png"
+        if obstacle_type == "wheel":
+            size = (80, 80)
+            img_path = "assets\Obstacles\wheel.png"   # заглушки для різних типів
+        elif obstacle_type == "banana":
+            size = (70, 70)
+            img_path = "assets\Obstacles\\banana.png"
+        elif obstacle_type == "puddle":
+            size = (90, 90)
+            img_path = "assets\Obstacles\puddle.png"
+        elif obstacle_type == "paper_bag":
+            size = (80, 80)
+            img_path = "assets\Obstacles\paper_bag.png"
+        else: 
+            size = (90, 90)
+            img_path = "assets\Obstacles\iguana.png"
         
         original = pygame.image.load(img_path).convert_alpha()
         self.image = pygame.transform.scale(original, size)
