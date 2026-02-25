@@ -111,6 +111,7 @@ class Menu(IDrawable):
             self.settings.road_index = (self.settings.road_index + direction) % len(self.settings.available_roads)
         elif item == "Music":
             self.settings.music_index = (self.settings.music_index + direction) % len(self.settings.music_library)
+            self.settings.music_was_selected = True
             self.settings.apply_music()
         elif item == "Volume":
             self.settings.sound_volume = min(1.0, max(0.0, self.settings.sound_volume + 0.1 * direction))

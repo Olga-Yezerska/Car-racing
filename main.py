@@ -81,13 +81,14 @@ while running:
         game.draw_only()
         result = menu.handle_input(input_data)
         menu.draw()
+        input_handler.player = None
 
         if result == "restart":
             game = Game(screen, settings)
             input_handler.player = game.player
             pygame.mixer.music.stop()
             settings.apply_music()
-            input_handler.player = None
+            
             state = "game"
 
         elif result == "menu":
