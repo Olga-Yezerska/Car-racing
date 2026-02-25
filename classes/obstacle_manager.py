@@ -16,7 +16,7 @@ class ObstacleManager:
         
         # Визначаємо розмір "буферної зони" у пікселях (ширина, висота).
         # Це значення додається до розміру перешкоди для перевірки вільного місця.
-        self.safe_margin = (80, 200)
+        self.safe_margin = (130, 200)
 
     def update(self) -> None:
         """
@@ -27,14 +27,16 @@ class ObstacleManager:
             
             # різні ймовірності для різних типів
             r = random.random()
-            if r < 0.15:
-                obs_type = "small"
-            elif r < 0.25:
-                obs_type = "large"
-            elif r < 0.30:
-                obs_type = "truck"
+            if r < 0.2:
+                obs_type = "banana"
+            elif r < 0.4:
+                obs_type = "iguana"
+            elif r < 0.6:
+                obs_type = "paper_bag"
+            elif r < 0.8:
+                obs_type = "puddle"
             else:
-                obs_type = "normal"
+                obs_type = "wheel"
                 
             # 1. Створюємо нову перешкоду, але поки НЕ додаємо її в основний список
             new_obs = Obstacle(x, obstacle_type=obs_type, speed=self.scroll_speed)
