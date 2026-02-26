@@ -16,7 +16,7 @@ class PlayerCar(ICollidable, IUpdatable, IDrawable):
         self.y = y
         self.speed = speed
         original = pygame.image.load(car_skin).convert_alpha()
-        self.image = pygame.transform.scale(original, (60, 100))   
+        self.image = pygame.transform.scale(original, (70, 150))   
         self.rect = self.image.get_rect(center=(self.x, self.y)) 
 
     def move_left(self):
