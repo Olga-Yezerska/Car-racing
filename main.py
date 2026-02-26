@@ -88,7 +88,6 @@ while running:
             input_handler.player = game.player
             pygame.mixer.music.stop()
             settings.apply_music()
-            
             state = "game"
 
         elif result == "menu":
