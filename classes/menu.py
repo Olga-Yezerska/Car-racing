@@ -97,7 +97,10 @@ class Menu(IDrawable):
             self.settings.music_index = (self.settings.music_index + direction) % len(self.settings.music_library)
             self.settings.music_was_selected = True
             self.settings.apply_music()
-        elif item == "Volume":
-            self.settings.sound_volume = min(1.0, max(0.0, self.settings.sound_volume + 0.1 * direction))
+        elif item == "Volume":            
+            new_volume = self.settings.sound_volume + 0.1 * direction
+            self.settings.sound_volume = min(1.0, max(0.0, new_volume))           
+            self.settings.sound_volume = round(self.settings.sound_volume, 1)
+            pygame.mixer.music.set_volume(self.settings.sound_volume) 
 
     
