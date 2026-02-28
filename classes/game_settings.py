@@ -36,6 +36,11 @@ class GameSettings:
         self.sound_volume = 0.5
         self.music_was_selected = False
 
+        # --- Фони меню ---
+        self.menu_backgrounds = {
+        "main": "assets/Backgrounds/main_menu.jpg",
+        "settings": "assets/Backgrounds/settings_menu.jpg"}
+
 
     # -------- Load music from folder --------
     def load_music(self):
