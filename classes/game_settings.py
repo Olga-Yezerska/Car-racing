@@ -11,7 +11,7 @@ class GameSettings:
         """
         Ініціалізація списків доступних ресурсів та початкових параметрів.
         """
-        # --- Списки доступних скінів та трас (Назва, Шлях до файлу) ---
+        # --- Списки доступних скінів та трас  ---
         self.available_cars = [
             ("Alpine",      "assets/Car/alpine.png"),
             ("Aston Martin","assets/Car/aston.png"),
@@ -42,7 +42,7 @@ class GameSettings:
         self.music_library = self.load_music() # Автоматичне сканування папки
         self.music_index = 0
         self.sound_volume = 0.5
-        self.music_was_selected = False # Прапорець, чи вибрав користувач трек вручну
+        self.music_was_selected = False # чи вибрав користувач трек вручну
 
         # --- Конфігурація фонів меню ---
         self.menu_backgrounds = {
@@ -50,7 +50,6 @@ class GameSettings:
             "settings": "assets/Backgrounds/settings_menu.jpg"
         }
 
-    # -------- Завантаження списку музики --------
     def load_music(self) -> list:
         """
         Сканує папку з музикою та повертає список шляхів до MP3 файлів.
@@ -67,7 +66,6 @@ class GameSettings:
             if file.endswith(".mp3")
         ]
 
-    # -------- Фабричні методи (Factory Methods) --------
     def create_car(self):
         """
         Створює та повертає об'єкт PlayerCar з вибраним скіном.
@@ -85,7 +83,6 @@ class GameSettings:
         road_path = self.available_roads[self.road_index][1]
         return Road(road_path)
      
-    # -------- Керування відтворенням --------
     def apply_music(self):
         """Завантажує та запускає відтворення поточного вибраного треку."""
         if not self.music_library:
@@ -93,7 +90,7 @@ class GameSettings:
             
         pygame.mixer.music.load(self.music_library[self.music_index])
         pygame.mixer.music.set_volume(self.sound_volume)
-        pygame.mixer.music.play(-1) # -1 означає нескінченний повтор
+        pygame.mixer.music.play(-1)
 
     def play_random_music(self):
         """Грає випадковий трек, якщо користувач не вибрав конкретний у меню."""
@@ -101,7 +98,6 @@ class GameSettings:
             self.music_index = random.randint(0, len(self.music_library) - 1)
         self.apply_music()
 
-    # -------- Інформаційні методи --------
     def get_settings(self):
         """Повертає словник з поточними вибраними налаштуваннями."""
         return {

@@ -39,16 +39,15 @@ class GameApp:
         залежно від стану та рендерить зображення на екран.
         """
         while self.running:
-            # Отримання списку подій від Pygame
+        
             events = pygame.event.get()
-            # Попередня обробка введення (клавіші, вихід)
+ 
             input_data = self.input_handler.handle_input(events)
 
-            # Перевірка на закриття вікна
             if input_data.get("quit"):
                 self.running = False
 
-            # Машина станів (State Machine)
+
             if self.state == "menu":
                 self.handle_menu(input_data)
 
@@ -61,10 +60,8 @@ class GameApp:
             elif self.state == "game_over":
                 self.handle_game_over(input_data)
 
-            # Оновлення вмісту всього екрана
             pygame.display.flip()
 
-        # Завершення роботи Pygame після виходу з циклу
         pygame.quit()
 
     # ---------------- ОБРОБНИКИ СТАНІВ (STATES) ----------------
@@ -78,14 +75,13 @@ class GameApp:
         result = self.menu.handle_input(input_data)
         self.menu.draw()
 
-        # Перехід до гри при натисканні "Start"
         if result == "start":
             self.game = Game(self.screen, self.settings)
             self.input_handler.player = self.game.player
             self.settings.play_random_music()
             self.state = "game"
 
-        # Вихід з програми
+
         elif result == "quit":
             self.running = False
 
@@ -97,11 +93,10 @@ class GameApp:
         """
         result = self.game.run_frame(input_data)
 
-        # Перевірка результату кадру (пауза або поразка)
         if result == "pause":
             self.menu.mode = "pause"
             self.menu.selected_index = 0
-            self.input_handler.player = None  # Зупиняємо керування гравцем
+            self.input_handler.player = None  
             self.state = "pause"
 
         elif result == "game_over":
@@ -116,16 +111,14 @@ class GameApp:
         
         :param input_data: словник з даними про натиснуті клавіші
         """
-        self.game.draw_only()  # Малюємо фон гри без оновлення логіки
+        self.game.draw_only() 
         result = self.menu.handle_input(input_data)
         self.menu.draw()
 
-        # Повернення до гри
         if result == "resume":
             self.input_handler.player = self.game.player
             self.state = "game"
 
-        # Повернення до головного меню
         elif result == "menu":
             self.menu.mode = "main"
             self.menu.selected_index = 0
@@ -142,7 +135,6 @@ class GameApp:
         result = self.menu.handle_input(input_data)
         self.menu.draw()
 
-        # Почати гонку заново
         if result == "restart":
             self.game = Game(self.screen, self.settings)
             self.input_handler.player = self.game.player
@@ -150,7 +142,6 @@ class GameApp:
             self.settings.apply_music()
             self.state = "game"
 
-        # Повернення до головного меню
         elif result == "menu":
             self.menu.mode = "main"
             self.menu.selected_index = 0

@@ -26,9 +26,9 @@ class Menu(IDrawable):
         self.game_over_items = ["Restart", "Main Menu"]
 
         self.selected_index = 0  # Індекс поточного вибраного пункту
-        self.mode = "main"       # Поточний режим меню (main, settings, pause, game_over)
+        self.mode = "main"       # Поточний режим меню 
 
-        # Об'єкт, що відповідає за візуальне відображення меню
+
         self.drawer = MenuDrawer(screen, settings)
 
     def draw(self):
@@ -105,28 +105,24 @@ class Menu(IDrawable):
 
     def _change_setting(self, direction: int):
         """
-        Приватний метод для зміни значень налаштувань (автомобіль, дорога, гучність).
+        Метод для зміни значень налаштувань (автомобіль, дорога, гучність).
         
         :param direction: напрямок зміни (-1 або 1)
         """
         item = self.settings_items[self.selected_index]
         
         if item == "Car":
-            # Циклічний перебір доступних авто
             self.settings.car_index = (self.settings.car_index + direction) % len(self.settings.available_cars)
         
         elif item == "Road":
-            # Циклічний перебір доступних трас
             self.settings.road_index = (self.settings.road_index + direction) % len(self.settings.available_roads)
         
         elif item == "Music":
-            # Вибір треку та миттєве застосування
             self.settings.music_index = (self.settings.music_index + direction) % len(self.settings.music_library)
             self.settings.music_was_selected = True
             self.settings.apply_music()
         
         elif item == "Volume":            
-            # Робота з гучністю (від 0.0 до 1.0)
             new_volume = self.settings.sound_volume + 0.1 * direction
             self.settings.sound_volume = min(1.0, max(0.0, new_volume))           
             self.settings.sound_volume = round(self.settings.sound_volume, 1)
