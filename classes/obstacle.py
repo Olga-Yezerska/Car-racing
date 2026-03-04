@@ -18,19 +18,19 @@ class Obstacle(ICollidable, IUpdatable, IDrawable):
         
         if obstacle_type == "wheel":
             size = (80, 80)
-            img_path = "assets\Obstacles\wheel.png"   
+            img_path = "assets\\Obstacles\\wheel.png"   
         elif obstacle_type == "banana":
             size = (70, 70)
-            img_path = "assets\Obstacles\\banana.png"
+            img_path = "assets\\Obstacles\\banana.png"
         elif obstacle_type == "puddle":
             size = (90, 90)
-            img_path = "assets\Obstacles\puddle.png"
+            img_path = "assets\\Obstacles\\puddle.png"
         elif obstacle_type == "paper_bag":
             size = (80, 80)
-            img_path = "assets\Obstacles\paper_bag.png"
+            img_path = "assets\\Obstacles\\paper_bag.png"
         else: 
             size = (90, 90)
-            img_path = "assets\Obstacles\iguana.png"
+            img_path = "assets\\Obstacles\\iguana.png"
         
         original = pygame.image.load(img_path).convert_alpha()
         self.image = pygame.transform.scale(original, size)
