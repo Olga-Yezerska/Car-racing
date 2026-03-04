@@ -7,7 +7,6 @@ class Obstacle(ICollidable, IUpdatable, IDrawable):
         Ініціалізує об'єкт перешкоди.
 
         :param x: Початкове горизонтальне положення.
-        :param x: Початкове горизонтальне положення.
         :param obstacle_type: Тип перешкоди.
         :param y: Початкове вертикальне положення (починається над екраном).
         :param speed: Швидкість, з якою перешкода рухається вниз по екрану.
@@ -19,19 +18,19 @@ class Obstacle(ICollidable, IUpdatable, IDrawable):
         
         if obstacle_type == "wheel":
             size = (80, 80)
-            img_path = "assets\Obstacles\wheel.png"   # заглушки для різних типів
+            img_path = "assets\\Obstacles\\wheel.png"   
         elif obstacle_type == "banana":
             size = (70, 70)
-            img_path = "assets\Obstacles\\banana.png"
+            img_path = "assets\\Obstacles\\banana.png"
         elif obstacle_type == "puddle":
             size = (90, 90)
-            img_path = "assets\Obstacles\puddle.png"
+            img_path = "assets\\Obstacles\\puddle.png"
         elif obstacle_type == "paper_bag":
             size = (80, 80)
-            img_path = "assets\Obstacles\paper_bag.png"
+            img_path = "assets\\Obstacles\\paper_bag.png"
         else: 
             size = (90, 90)
-            img_path = "assets\Obstacles\iguana.png"
+            img_path = "assets\\Obstacles\\iguana.png"
         
         original = pygame.image.load(img_path).convert_alpha()
         self.image = pygame.transform.scale(original, size)
@@ -39,23 +38,23 @@ class Obstacle(ICollidable, IUpdatable, IDrawable):
 
     def update(self) -> None:
         """
-        Updates the obstacle's position by moving it down.
+        Оновлює положення перешкоди, переміщуючи її вниз.
         """
         self.y += self.speed
         self.rect.centery = self.y
 
     def draw(self, screen: pygame.Surface) -> None:
         """
-        Draws the obstacle on the screen.
+        Малює перешкоду на екрані.
         
-        :param screen: The Pygame surface to draw on.
+        :param screen: Поверхня Pygame, на якій буде малюватись.
         """
         screen.blit(self.image, self.rect)
 
     def get_rect(self) -> pygame.Rect:
         """
-        Returns the rectangle for collision detection.
+        Повертає прямокутник для виявлення зіткнення.
         
-        :return: The obstacle's Rect.
+        :return: Прямокутник перешкоди.
         """
         return self.rect

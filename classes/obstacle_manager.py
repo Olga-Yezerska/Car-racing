@@ -38,25 +38,18 @@ class ObstacleManager:
             else:
                 obs_type = "wheel"
                 
-            # 1. Створюємо нову перешкоду, але поки НЕ додаємо її в основний список
             new_obs = Obstacle(x, obstacle_type=obs_type, speed=self.scroll_speed)
-            
-            # 2. Створюємо збільшений прямокутник (безпечну зону) навколо нової перешкоди
-            # inflate(x, y) розширює прямокутник з центру на задану кількість пікселів
             safe_zone = new_obs.get_rect().inflate(self.safe_margin[0], self.safe_margin[1])
             
-            # 3. Перевіряємо, чи перетинається ця зона з існуючими перешкодами
             safe_to_spawn = True
             for obs in self.obstacles:
                 if safe_zone.colliderect(obs.get_rect()):
                     safe_to_spawn = False
-                    break # Якщо знайшли хоча б один перетин - перериваємо цикл
+                    break 
             
-            # 4. Додаємо перешкоду в гру ТІЛЬКИ якщо навколо неї достатньо місця
             if safe_to_spawn:
                 self.obstacles.append(new_obs)
 
-        # Оновити існуючі перешкоди та видалити ті, що знаходяться поза екраном
         for obs in self.obstacles[:]:
             obs.update()
             if obs.y > self.screen_height + 50:
