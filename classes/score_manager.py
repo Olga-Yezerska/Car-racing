@@ -1,5 +1,7 @@
 from classes.interfaces import IUpdatable
 from classes.score import Score
+
+
 class ScoreManager(IUpdatable):
     """
     Клас управління балами
