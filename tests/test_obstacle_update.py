@@ -1,5 +1,6 @@
 import pytest
 
+
 @pytest.mark.obstacle
 def test_obstacle_update(obstacle):
     """
