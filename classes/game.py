@@ -1,10 +1,10 @@
 import pygame
-from classes.input_handler import InputHandler
 from classes.obstacle_manager import ObstacleManager
 from classes.collision_system import CollisionSystem
 from classes.score import Score
 from classes.score_manager import ScoreManager
 from classes.score_display import ScoreDisplay
+
 
 class Game:
     """
@@ -23,7 +23,7 @@ class Game:
         self.settings = settings
 
         self.player = self.settings.create_car()
-        self.road = self.settings.create_road()  
+        self.road = self.settings.create_road()
         
         self.obstacle_manager = ObstacleManager(self.road.scroll_speed)
         self.collision_system = CollisionSystem(self.player, self.obstacle_manager)
@@ -51,8 +51,7 @@ class Game:
         if input_data.get("pause_toggle"):
             return "pause"
 
-      
-        self.player.update() 
+        self.player.update()
         self.road.update()
         self.obstacle_manager.update()
         self.score_manager.update()
@@ -61,7 +60,7 @@ class Game:
             self.game_over = True
             return "game_over"
 
-        self.draw_only() 
+        self.draw_only()
 
         self.clock.tick(60)
         return None
