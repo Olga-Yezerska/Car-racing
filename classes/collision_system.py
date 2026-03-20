@@ -1,11 +1,11 @@
-import pygame
 from classes.interfaces import ICollidable
+
 
 class CollisionSystem:
     def __init__(self, player: ICollidable, obstacle_manager):
         """
         Ініціалізує систему зіткнень з гравцем і менеджером перешкод.
-        
+       
         :param player: Об'єкт автомобіля гравця, що реалізує ICollidable.
         :param obstacle_manager: Менеджер, що обробляє перешкоди.
         """
