@@ -1,6 +1,7 @@
 import pygame
 from classes.interfaces import ICollidable, IUpdatable, IDrawable
 
+
 class Obstacle(ICollidable, IUpdatable, IDrawable):
     def __init__(self, x: int, obstacle_type: str = "normal", y: int = -50, speed: int = 6):
         """
@@ -18,7 +19,7 @@ class Obstacle(ICollidable, IUpdatable, IDrawable):
         
         if obstacle_type == "wheel":
             size = (80, 80)
-            img_path = "assets\\Obstacles\\wheel.png"   
+            img_path = "assets\\Obstacles\\wheel.png"
         elif obstacle_type == "banana":
             size = (70, 70)
             img_path = "assets\\Obstacles\\banana.png"
@@ -28,7 +29,7 @@ class Obstacle(ICollidable, IUpdatable, IDrawable):
         elif obstacle_type == "paper_bag":
             size = (80, 80)
             img_path = "assets\\Obstacles\\paper_bag.png"
-        else: 
+        else:
             size = (90, 90)
             img_path = "assets\\Obstacles\\iguana.png"
         
