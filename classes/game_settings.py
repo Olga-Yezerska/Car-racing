@@ -2,6 +2,7 @@ import pygame
 import os
 import random
 
+
 class GameSettings:
     """
     Клас для керування налаштуваннями гри, ресурсами та звуковим супроводом.
@@ -13,24 +14,24 @@ class GameSettings:
         """
         # --- Списки доступних скінів та трас  ---
         self.available_cars = [
-            ("Alpine",      "assets/Car/alpine.png"),
-            ("Aston Martin","assets/Car/aston.png"),
-            ("Audi",        "assets/Car/audi.png"),
-            ("Ferrari",     "assets/Car/ferrari.png"),
-            ("Haas",        "assets/Car/haas.png"),
-            ("McLaren",     "assets/Car/mclaren.png"),
-            ("Mercedes",    "assets/Car/mercedes.png"),
-            ("Red Bull",    "assets/Car/red_bull.png"),
-            ("VCARB",       "assets/Car/vcarb.png"),
-            ("Williams",    "assets/Car/williams.png"),
+            ("Alpine", "assets/Car/alpine.png"),
+            ("Aston Martin", "assets/Car/aston.png"),
+            ("Audi", "assets/Car/audi.png"),
+            ("Ferrari", "assets/Car/ferrari.png"),
+            ("Haas", "assets/Car/haas.png"),
+            ("McLaren", "assets/Car/mclaren.png"),
+            ("Mercedes", "assets/Car/mercedes.png"),
+            ("Red Bull", "assets/Car/red_bull.png"),
+            ("VCARB", "assets/Car/vcarb.png"),
+            ("Williams", "assets/Car/williams.png"),
         ]
 
         self.available_roads = [
-            ("Monaco",     "assets/Road/monaco_track.jpg"),
-            ("Baku",       "assets/Road/baku_track.png"),
-            ("Singapore",  "assets/Road/singapore_track.jpg"),
-            ("Spa",        "assets/Road/spa_track.png"),
-            ("Las Vegas",  "assets/Road/vegas_track.jpg"),
+            ("Monaco", "assets/Road/monaco_track.jpg"),
+            ("Baku", "assets/Road/baku_track.png"),
+            ("Singapore", "assets/Road/singapore_track.jpg"),
+            ("Spa", "assets/Road/spa_track.png"),
+            ("Las Vegas", "assets/Road/vegas_track.jpg"),
         ]
 
         # Індекси поточного вибору користувача
@@ -39,10 +40,10 @@ class GameSettings:
 
         # --- Музична система ---
         self.music_folder = "assets/Music"
-        self.music_library = self.load_music() # Автоматичне сканування папки
+        self.music_library = self.load_music()  # Автоматичне сканування папки
         self.music_index = 0
         self.sound_volume = 0.5
-        self.music_was_selected = False # чи вибрав користувач трек вручну
+        self.music_was_selected = False  # чи вибрав користувач трек вручну
 
         # --- Конфігурація фонів меню ---
         self.menu_backgrounds = {
