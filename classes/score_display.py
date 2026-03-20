@@ -1,6 +1,8 @@
 import pygame
 from classes.interfaces import IDrawable
 from classes.score_manager import ScoreManager
+
+
 class ScoreDisplay(IDrawable):
     """
     Клас реалізації виведення балів
@@ -16,7 +18,7 @@ class ScoreDisplay(IDrawable):
         """
         self.score_manager = score_manager
         self.font = pygame.font.SysFont("arial", font_size, bold=True)
-        self.color = (255, 255, 255) 
+        self.color = (255, 255, 255)
 
     def draw(self, screen: pygame.Surface) -> None:
         """
