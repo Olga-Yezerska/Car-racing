@@ -1,6 +1,7 @@
 import pygame
 from classes.interfaces import IDrawable, IUpdatable
 
+
 class Road(IUpdatable, IDrawable):
     """
     Клас дороги гри
@@ -18,7 +19,6 @@ class Road(IUpdatable, IDrawable):
         """
         original_bg = pygame.image.load(background_path).convert()
         screen_width = pygame.display.get_surface().get_width()
-        screen_height = pygame.display.get_surface().get_height()
     
         self.background = pygame.transform.scale(original_bg, (screen_width, original_bg.get_height()))
         self.scroll_speed = scroll_speed
@@ -45,4 +45,3 @@ class Road(IUpdatable, IDrawable):
         """
         screen.blit(self.background, (0, self.offset_y))
         screen.blit(self.background, (0, self.offset_y - self.background.get_height()))
-        
