@@ -2,7 +2,7 @@ class Score():
     """
     Клас балів гравця
     """
-    def __init__(self, initial_score=0): 
+    def __init__(self, initial_score=0):
         """
         Ініціалізує об'єкт балів
         
