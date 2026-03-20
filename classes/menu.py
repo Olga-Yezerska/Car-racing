@@ -1,7 +1,7 @@
 import pygame
 from classes.menu_drawer import MenuDrawer
 from classes.interfaces import IDrawable
-from classes.game_settings import GameSettings
+
 
 class Menu(IDrawable):
     """
@@ -26,8 +26,7 @@ class Menu(IDrawable):
         self.game_over_items = ["Restart", "Main Menu"]
 
         self.selected_index = 0  # Індекс поточного вибраного пункту
-        self.mode = "main"       # Поточний режим меню 
-
+        self.mode = "main"  # Поточний режим меню
 
         self.drawer = MenuDrawer(screen, settings)
 
@@ -122,8 +121,8 @@ class Menu(IDrawable):
             self.settings.music_was_selected = True
             self.settings.apply_music()
         
-        elif item == "Volume":            
+        elif item == "Volume":
             new_volume = self.settings.sound_volume + 0.1 * direction
-            self.settings.sound_volume = min(1.0, max(0.0, new_volume))           
+            self.settings.sound_volume = min(1.0, max(0.0, new_volume))
             self.settings.sound_volume = round(self.settings.sound_volume, 1)
             pygame.mixer.music.set_volume(self.settings.sound_volume)
