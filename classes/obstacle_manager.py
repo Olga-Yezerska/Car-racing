@@ -2,6 +2,7 @@ import random
 from classes.obstacle import Obstacle
 from classes.player_car import PlayerCar
 
+
 class ObstacleManager:
     def __init__(self, scroll_speed: int, screen_height: int = 600):
         """
@@ -45,7 +46,7 @@ class ObstacleManager:
             for obs in self.obstacles:
                 if safe_zone.colliderect(obs.get_rect()):
                     safe_to_spawn = False
-                    break 
+                    break
             
             if safe_to_spawn:
                 self.obstacles.append(new_obs)
