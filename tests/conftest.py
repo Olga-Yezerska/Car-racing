@@ -5,7 +5,7 @@ from classes.player_car import PlayerCar
 from classes.obstacle import Obstacle
 
 
-#Оголошення маркерів тестів
+# Оголошення маркерів тестів
 def pytest_configure(config):
     config.addinivalue_line("markers", "collision: тести зіткнень гравця з перешкодою")
     config.addinivalue_line("markers", "obstacle: тести перешкоди (оновлення)")
@@ -17,19 +17,20 @@ def pytest_configure(config):
     config.addinivalue_line("markers", "reset_score: тести оновлення очків")
 
 
-#Спільні фіксутри тестів
+# Спільні фіксутри тестів
 @pytest.fixture
 def car():
     """
     Фікстура для ініціалізації машини гравця
     """
-    #patch для щоб замінити pygame.image.load та pygame.transform.scale фіктивними об'єктами
+    # patch для щоб замінити pygame.image.load та pygame.transform.scale фіктивними об'єктами
     with patch("classes.player_car.pygame.image.load"), \
-         patch("classes.player_car.pygame.transform.scale") as mock_scale: 
+         patch("classes.player_car.pygame.transform.scale") as mock_scale:
         fake_surf = MagicMock()
         fake_surf.get_rect.return_value = pygame.Rect(365, 425, 70, 150)
         mock_scale.return_value = fake_surf
         yield PlayerCar("fake.png", x=400)
+
 
 @pytest.fixture
 def obstacle():
