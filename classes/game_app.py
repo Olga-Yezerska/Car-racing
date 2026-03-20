@@ -7,7 +7,7 @@ from classes.input_handler import InputHandler
 
 class GameApp:
     """
-    Головний клас додатка, який керує життєвим циклом гри, 
+    Головний клас додатка, який керує життєвим циклом гри,
     станами (меню, гра, пауза) та ініціалізацією Pygame
     """
     
@@ -35,7 +35,7 @@ class GameApp:
 
     def run(self):
         """
-        Головний цикл програми, який обробляє події, оновлює логіку 
+        Головний цикл програми, який обробляє події, оновлює логіку
         залежно від стану та рендерить зображення на екран.
         """
         while self.running:
@@ -46,7 +46,6 @@ class GameApp:
 
             if input_data.get("quit"):
                 self.running = False
-
 
             if self.state == "menu":
                 self.handle_menu(input_data)
@@ -81,7 +80,6 @@ class GameApp:
             self.settings.play_random_music()
             self.state = "game"
 
-
         elif result == "quit":
             self.running = False
 
@@ -96,7 +94,7 @@ class GameApp:
         if result == "pause":
             self.menu.mode = "pause"
             self.menu.selected_index = 0
-            self.input_handler.player = None  
+            self.input_handler.player = None
             self.state = "pause"
 
         elif result == "game_over":
@@ -111,7 +109,7 @@ class GameApp:
         
         :param input_data: словник з даними про натиснуті клавіші
         """
-        self.game.draw_only() 
+        self.game.draw_only()
         result = self.menu.handle_input(input_data)
         self.menu.draw()
 
