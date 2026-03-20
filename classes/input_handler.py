@@ -1,5 +1,6 @@
 import pygame
 
+
 class InputHandler:
     """
     Клас для обробки введень користувача
