@@ -9,7 +9,7 @@ class ICollidable(ABC):
         """Повертає прямокутник об'єкта для перевірки зіткнень"""
         pass
 
-       
+
 class IDrawable(ABC):
     """Інтерфейс для об'єктів, які потрібно намалювати"""
     @abstractmethod

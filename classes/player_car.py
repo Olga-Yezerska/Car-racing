@@ -5,7 +5,7 @@ from classes.interfaces import ICollidable, IUpdatable, IDrawable
 class PlayerCar(ICollidable, IUpdatable, IDrawable):
     LEFT_LIMIT = 140
     RIGHT_LIMIT = 660
-    
+
     def __init__(self, car_skin: str, x: int = 400, y: int = 500, speed: int = 5):
         """
         Конструктор машини гравця

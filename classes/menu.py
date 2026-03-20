@@ -13,12 +13,12 @@ class Menu(IDrawable):
     def __init__(self, screen, settings):
         """
         Ініціалізація меню та описів його пунктів.
-        
+
         :param screen: поверхня для малювання
         :param settings: об'єкт GameSettings для доступу до параметрів гри
         """
         self.settings = settings
-        
+
         # Списки пунктів для різних режимів меню
         self.main_items = ["Play", "Settings", "Exit"]
         self.settings_items = ["Car", "Road", "Music", "Volume"]
@@ -37,7 +37,7 @@ class Menu(IDrawable):
     def handle_input(self, input_data: dict) -> str:
         """
         Обробляє введення користувача для навігації по меню.
-        
+
         :param input_data: словник з командами (up, down, enter, etc.)
         :return: рядок-команда для GameApp або None
         """
@@ -105,22 +105,22 @@ class Menu(IDrawable):
     def _change_setting(self, direction: int):
         """
         Метод для зміни значень налаштувань (автомобіль, дорога, гучність).
-        
+
         :param direction: напрямок зміни (-1 або 1)
         """
         item = self.settings_items[self.selected_index]
-        
+
         if item == "Car":
             self.settings.car_index = (self.settings.car_index + direction) % len(self.settings.available_cars)
-        
+
         elif item == "Road":
             self.settings.road_index = (self.settings.road_index + direction) % len(self.settings.available_roads)
-        
+
         elif item == "Music":
             self.settings.music_index = (self.settings.music_index + direction) % len(self.settings.music_library)
             self.settings.music_was_selected = True
             self.settings.apply_music()
-        
+
         elif item == "Volume":
             new_volume = self.settings.sound_volume + 0.1 * direction
             self.settings.sound_volume = min(1.0, max(0.0, new_volume))

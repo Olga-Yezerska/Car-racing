@@ -15,7 +15,7 @@ class InputHandler:
     def handle_input(self, events: list[pygame.event.Event]) -> dict:
         """
         Метод обробки отриманих даних
-        
+
         :param self: об'єкт керування
         :param events: список оброблюваних подій
         :type events: list[pygame.event.Event]

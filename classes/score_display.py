@@ -10,7 +10,7 @@ class ScoreDisplay(IDrawable):
     def __init__(self, score_manager: ScoreManager, font_size: int = 36):
         """
         Ініціалізація об'єкту класу
-        
+
         :param score_manager: менеджер управління балами
         :type score_manager: ScoreManager
         :param font_size: розмір шрифту на інтерфейсі
@@ -23,7 +23,7 @@ class ScoreDisplay(IDrawable):
     def draw(self, screen: pygame.Surface) -> None:
         """
         Функція малювання на екрані
-        
+
         :param screen: екран для відображення - фон дороги
         :type screen: pygame.Surface
         """

@@ -16,7 +16,7 @@ class Obstacle(ICollidable, IUpdatable, IDrawable):
         self.y = y
         self.speed = speed
         self.obstacle_type = obstacle_type
-        
+
         if obstacle_type == "wheel":
             size = (80, 80)
             img_path = "assets\\Obstacles\\wheel.png"
@@ -32,7 +32,7 @@ class Obstacle(ICollidable, IUpdatable, IDrawable):
         else:
             size = (90, 90)
             img_path = "assets\\Obstacles\\iguana.png"
-        
+
         original = pygame.image.load(img_path).convert_alpha()
         self.image = pygame.transform.scale(original, size)
         self.rect = self.image.get_rect(center=(self.x, self.y))
@@ -47,7 +47,7 @@ class Obstacle(ICollidable, IUpdatable, IDrawable):
     def draw(self, screen: pygame.Surface) -> None:
         """
         Малює перешкоду на екрані.
-        
+
         :param screen: Поверхня Pygame, на якій буде малюватись.
         """
         screen.blit(self.image, self.rect)
@@ -55,7 +55,7 @@ class Obstacle(ICollidable, IUpdatable, IDrawable):
     def get_rect(self) -> pygame.Rect:
         """
         Повертає прямокутник для виявлення зіткнення.
-        
+
         :return: Прямокутник перешкоди.
         """
         return self.rect

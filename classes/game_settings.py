@@ -54,13 +54,13 @@ class GameSettings:
     def load_music(self) -> list:
         """
         Сканує папку з музикою та повертає список шляхів до MP3 файлів.
-        
+
         :return: список рядків (шляхів до файлів)
         """
         if not os.path.exists(self.music_folder):
             print(f"Попередження: Папку {self.music_folder} не знайдено.")
             return []
-            
+
         return [
             os.path.join(self.music_folder, file)
             for file in os.listdir(self.music_folder)
@@ -75,7 +75,7 @@ class GameSettings:
         from classes.player_car import PlayerCar
         car_path = self.available_cars[self.car_index][1]
         return PlayerCar(car_path)
-    
+
     def create_road(self):
         """
         Створює та повертає об'єкт Road з вибраною текстурою траси.
@@ -83,12 +83,12 @@ class GameSettings:
         from classes.road import Road
         road_path = self.available_roads[self.road_index][1]
         return Road(road_path)
-     
+
     def apply_music(self):
         """Завантажує та запускає відтворення поточного вибраного треку."""
         if not self.music_library:
             return
-            
+
         pygame.mixer.music.load(self.music_library[self.music_index])
         pygame.mixer.music.set_volume(self.sound_volume)
         pygame.mixer.music.play(-1)

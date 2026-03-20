@@ -5,7 +5,7 @@ class CollisionSystem:
     def __init__(self, player: ICollidable, obstacle_manager):
         """
         Ініціалізує систему зіткнень з гравцем і менеджером перешкод.
-       
+
         :param player: Об'єкт автомобіля гравця, що реалізує ICollidable.
         :param obstacle_manager: Менеджер, що обробляє перешкоди.
         """
@@ -15,7 +15,7 @@ class CollisionSystem:
     def check_collisions(self) -> bool:
         """
         Перевіряє наявність зіткнень між гравцем і будь-якими перешкодами.
-        
+
         :return: True, якщо виявлено зіткнення, False в іншому випадку.
         """
         for obstacle in self.obstacle_manager.obstacles:

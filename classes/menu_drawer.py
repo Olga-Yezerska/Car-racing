@@ -10,22 +10,22 @@ class MenuDrawer(IDrawable):
     def __init__(self, screen, settings):
         """
         Ініціалізація ресурсів для малювання меню.
-        
+
         :param screen: поверхня Pygame для виводу зображення
         :param settings: об'єкт налаштувань для отримання шляхів до ресурсів
         """
         self.screen = screen
         self.settings = settings
-        
+
         self.font_big = pygame.font.SysFont(None, 72)
         self.font_small = pygame.font.SysFont(None, 40)
-         
+
         self.car_preview_pos = (480, 120)
         self.car_preview_size = (180, 360)
-        
+
         self.car_images = {}
         self.background_images = {}
-        
+
         self._preload_car_images()
         self._preload_background_images()
 
@@ -60,15 +60,15 @@ class MenuDrawer(IDrawable):
     def draw(self, menu):
         """
         Головний метод рендерингу меню залежно від його поточного стану (режиму).
-        
+
         :param menu: об'єкт класу Menu, що містить поточний стан та індекси
         """
-      
+
         if menu.mode in self.background_images:
             self.screen.blit(self.background_images[menu.mode], (0, 0))
         elif menu.mode not in ["pause", "game_over"]:
             self.screen.fill((20, 20, 20))
-        
+
         if menu.mode == "main":
             overlay = pygame.Surface(self.screen.get_size(), pygame.SRCALPHA)
             overlay.fill((0, 0, 0, 40))
@@ -111,7 +111,7 @@ class MenuDrawer(IDrawable):
             for i, (name, value) in enumerate(zip(menu.settings_items, values)):
                 text = f"{name}: {value}"
                 self._draw_text(text, 190 + i * 50, i == menu.selected_index)
-            
+
             car_path = self.settings.available_cars[self.settings.car_index][1]
             car_img = self.car_images.get(car_path)
             if car_img:
@@ -132,7 +132,7 @@ class MenuDrawer(IDrawable):
     def _draw_overlay(self, title_text, items, selected_index):
         """
         Малює повноцінне модальне вікно (для паузи або кінця гри).
-        
+
         :param title_text: великий заголовок зверху
         :param items: список кнопок
         :param selected_index: індекс вибраної кнопки

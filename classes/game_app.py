@@ -10,7 +10,7 @@ class GameApp:
     Головний клас додатка, який керує життєвим циклом гри,
     станами (меню, гра, пауза) та ініціалізацією Pygame
     """
-    
+
     def __init__(self):
         """
         Конструктор класу: ініціалізує модулі Pygame, вікно гри,
@@ -39,9 +39,9 @@ class GameApp:
         залежно від стану та рендерить зображення на екран.
         """
         while self.running:
-        
+
             events = pygame.event.get()
- 
+
             input_data = self.input_handler.handle_input(events)
 
             if input_data.get("quit"):
@@ -68,7 +68,7 @@ class GameApp:
     def handle_menu(self, input_data: dict):
         """
         Обробка логіки головного меню.
-        
+
         :param input_data: словник з даними про натиснуті клавіші
         """
         result = self.menu.handle_input(input_data)
@@ -86,7 +86,7 @@ class GameApp:
     def handle_game(self, input_data: dict):
         """
         Обробка ігрового процесу (активна фаза гонки).
-        
+
         :param input_data: словник з даними про натиснуті клавіші
         """
         result = self.game.run_frame(input_data)
@@ -106,7 +106,7 @@ class GameApp:
     def handle_pause(self, input_data: dict):
         """
         Обробка стану паузи (відображення меню поверх замороженої гри).
-        
+
         :param input_data: словник з даними про натиснуті клавіші
         """
         self.game.draw_only()
@@ -126,7 +126,7 @@ class GameApp:
     def handle_game_over(self, input_data: dict):
         """
         Обробка екрана завершення гри.
-        
+
         :param input_data: словник з даними про натиснуті клавіші
         """
         self.game.draw_only()

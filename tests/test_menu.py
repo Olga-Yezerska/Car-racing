@@ -30,6 +30,6 @@ def test_menu_navigate_down(menu):
                   "left": False,
                   "right": False,
                   "pause_toggle": False}  # словник значень
-    
+
     menu.handle_input(input_data)
     assert menu.selected_index == 1

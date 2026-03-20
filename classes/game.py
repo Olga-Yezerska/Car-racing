@@ -14,7 +14,7 @@ class Game:
     def __init__(self, screen, settings):
         """
         Конструктор ігрової сесії.
-        
+
         :param screen: поверхня Pygame для малювання (pygame.Surface)
         :param settings: об'єкт з налаштуваннями гри
         """
@@ -24,14 +24,14 @@ class Game:
 
         self.player = self.settings.create_car()
         self.road = self.settings.create_road()
-        
+
         self.obstacle_manager = ObstacleManager(self.road.scroll_speed)
         self.collision_system = CollisionSystem(self.player, self.obstacle_manager)
-        
+
         self.score = Score()
         self.score_manager = ScoreManager(self.score)
         self.score_display = ScoreDisplay(self.score_manager)
-        
+
         self.road.on_cycle_complete = self.score_manager.cycle_complete
 
         self.running = True
@@ -40,11 +40,11 @@ class Game:
     def run_frame(self, input_data: dict):
         """
         Метод обробки одного ігрового кадру (update + draw).
-        
+
         :param input_data: словник з командами від InputHandler
         :return: рядок-ідентифікатор зміни стану гри (якщо потрібен перехід)
         """
-      
+
         if input_data.get("quit"):
             return "menu"
 
@@ -70,12 +70,12 @@ class Game:
         Метод для рендерингу всіх ігрових елементів на екран.
         Використовується окремо, коли гра на паузі або закінчена.
         """
-    
+
         self.road.draw(self.screen)
-        
+
         self.player.draw(self.screen)
-    
+
         for obs in self.obstacle_manager.obstacles:
             obs.draw(self.screen)
-            
+
         self.score_display.draw(self.screen)

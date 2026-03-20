@@ -10,7 +10,7 @@ def manager():
     """
     return ScoreManager(Score())
 
- 
+
 @pytest.mark.cycle_complete
 def test_cycle_complete(manager):
     """
