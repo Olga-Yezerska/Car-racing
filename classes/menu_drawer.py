@@ -1,6 +1,7 @@
 import pygame
 from .interfaces import IDrawable
 
+
 class MenuDrawer(IDrawable):
     """
     Клас-рендерер, що відповідає за візуальне відображення інтерфейсу меню.
@@ -16,19 +17,15 @@ class MenuDrawer(IDrawable):
         self.screen = screen
         self.settings = settings
         
-
         self.font_big = pygame.font.SysFont(None, 72)
         self.font_small = pygame.font.SysFont(None, 40)
-        
-  
+         
         self.car_preview_pos = (480, 120)
         self.car_preview_size = (180, 360)
         
-
         self.car_images = {}
         self.background_images = {}
         
-
         self._preload_car_images()
         self._preload_background_images()
 
@@ -72,16 +69,15 @@ class MenuDrawer(IDrawable):
         elif menu.mode not in ["pause", "game_over"]:
             self.screen.fill((20, 20, 20))
         
-
         if menu.mode == "main":
             overlay = pygame.Surface(self.screen.get_size(), pygame.SRCALPHA)
-            overlay.fill((0, 0, 0, 40))  
-            self.screen.blit(overlay, (0, 0)) 
+            overlay.fill((0, 0, 0, 40))
+            self.screen.blit(overlay, (0, 0))
 
         if menu.mode == "settings":
             overlay = pygame.Surface(self.screen.get_size(), pygame.SRCALPHA)
-            overlay.fill((0, 0, 0, 160))  
-            self.screen.blit(overlay, (0, 0)) 
+            overlay.fill((0, 0, 0, 160))
+            self.screen.blit(overlay, (0, 0))
 
         if menu.mode == "main":
             screen_center_x = self.screen.get_width() // 2
@@ -121,7 +117,6 @@ class MenuDrawer(IDrawable):
             if car_img:
                 self.screen.blit(car_img, self.car_preview_pos)
 
-
         elif menu.mode == "pause":
             self._draw_overlay("PAUSE", menu.pause_items, menu.selected_index)
 
@@ -149,10 +144,8 @@ class MenuDrawer(IDrawable):
         overlay.fill((0, 0, 0, 200))
         self.screen.blit(overlay, (0, 0))
 
-     
         title_surf = self.font_big.render(title_text, True, (255, 80, 80))
         self.screen.blit(title_surf, (center_x - title_surf.get_width() // 2, 140))
-
 
         for i, item in enumerate(items):
             selected = i == selected_index
